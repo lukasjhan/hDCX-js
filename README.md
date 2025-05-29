@@ -15,7 +15,23 @@ With just simple interfaces, you can significantly simplify the credential manag
 ## Quick Start
 
 ```ts
-// sample code here
+// wallet Initialization
+const wallet = new Wallet();
+
+// Request Credentials
+const credentials = await wallet.request();
+
+// Save Credentials
+await wallet.save(credentials);
+
+// Load Credentials
+const loadedCredentials = await wallet.load();
+
+// Present Credentials
+const presentation = await wallet.present(loadedCredentials);
+
+// Validate Credentials
+const validation = await wallet.validate(presentation);
 ```
 
 In this example, you can easily
