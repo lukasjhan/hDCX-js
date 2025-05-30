@@ -1,15 +1,19 @@
 # hDCX
 
-Simplest Wallet Core SDK for Typescript
+**The Simplest Wallet Core SDK in Typescript.**<br/><br/>
+_Effortless credential handling. Fully standards-compliant._
 
-With just simple interfaces, you can significantly simplify the credential managing logic in you project. And it also covered in all aspects of speed, robustness, security and privacy to help you build a better experience.
+- Minimal API surface: intuitive and easy to integrate
+- Fast and lightweight: ideal for web, mobile, and embedded environments
+- Fully compliant: aligns with modern standards like SD-JWT, W3C VC, and eIDAS 2.0
 
-- Fast and lightweight credential managing
-- Simple interfaces, easy to understand and use
-- Developer friendly, typed and clear error messages
+### Supported Standards
+| eIDAS 2.0 | W3C VC   | SD-JWT | OIDC for VC | ISO/IEC 18013 |
+|-----------|----------|--------|--------------|----------------|
+| ARF 2.0✅ | VCDM 2.0✅<br/>VCDM 1.4✅<br/>VCDM 1.1✅ | 1.10✅| 1.0✅| Part 5 ✅<br/>Part 7  |
 
----
 
+  
 <!-- View full documentation on [here]() -->
 
 ## Quick Start
