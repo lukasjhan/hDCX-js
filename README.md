@@ -14,44 +14,30 @@ With just simple interfaces, you can significantly simplify the credential manag
 
 ## Quick Start
 
+### Wallet initialization
 ```ts
 // Initialize wallet
 const wallet = new Wallet();
+```
+### Recieve and save credentials
+```ts
+// You get the url or data for issued credentials
+const issuePayload = await scanQRCode(); // or deeplink or NFC/BLE
 
-// Request credentials issuance
-const session = await wallet.requestIssue(credentialOfferUri);
+// The library will recognize the method and will get it for you
+const credentials = await wallet.receive(issuePayload);
 
-// Check issuance status: pending | ready | denied | issued | expired
-const status = await session.getStatus();
-
-// Get credentials when status is ready
-if (status === "ready") {
-  const credentials = await session.getCredentials({
-    credentialType: "UniversityDegreeCredential",
-    txCode: "1234",
-    preAuthorizedCode: "Xyz123",
-  });
-
-  // Save Credentials
-  await wallet.save(credentials);
-}
-
-// Load Credentials
-const loadedCredentials = await wallet.load();
+// Then you can save credentials
+await wallet.save(credentials)
+```
+### Load and present credentials
+```ts
+// Load credentials with query
+const credentials = await wallet.load(['name', 'age']);
 
 // Present Credentials
-const presentation = await wallet.present(loadedCredentials);
-
-// Validate Credentials
-const validation = await wallet.validate(presentation);
+const presentation = await wallet.present(credentials);
 ```
-
-In this example, you can easily
-
-- request credentials
-- save & load credentials
-- present credentials
-- validate credentials
 
 ![img](/assets/wallet.png)
 
