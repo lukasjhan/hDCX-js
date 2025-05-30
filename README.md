@@ -10,7 +10,7 @@ _Effortless credential handling. Fully standards-compliant._
 ### Supported Standards
 | eIDAS 2.0 | W3C VC   | SD-JWT | OIDC for VC | ISO/IEC 18013 |
 |-----------|----------|--------|--------------|----------------|
-| ARF 2.0✅ | VCDM 2.0✅<br/>VCDM 1.4✅<br/>VCDM 1.1✅ | 1.10✅| 1.0✅| Part 5 ✅<br/>Part 7  |
+| ARF 2.0✅ | VCDM 2.0✅/ 1.4✅/ 1.1✅ | 1.10✅| 1.0✅| Part 5 ✅/ Part 7  |
 
 
   
