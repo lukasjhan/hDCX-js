@@ -1,16 +1,15 @@
-import { rawDCQL } from '../types/credential';
-
-import { v4 as uuidv4 } from 'uuid';
-import { IWalletStorage } from '../types/storage';
-import { DCQL } from '@vdcs/dcql';
+import { DCQL, rawDCQL } from '@vdcs/dcql';
 import { Format } from '@vdcs/oid4vci';
 import { decodeSDJWT } from '../utils';
+import { IWalletStorage } from '../types/storage';
+
+const KEY_PREFIX = 'credential.';
 
 class CredentialStore {
   constructor(private storage: IWalletStorage) {}
 
   private buildKey(id: string) {
-    return `credential:${id}`;
+    return `${KEY_PREFIX}${id}`;
   }
 
   async saveCredential({
@@ -19,59 +18,88 @@ class CredentialStore {
   }: {
     credential: string;
     format: Format;
-  }): Promise<void> {
-    await this.storage.setItem(
-      this.buildKey(uuidv4()),
-      JSON.stringify({ credential, format }),
-    );
+  }): Promise<string | void> {
+    try {
+      const id = this.storage.generateUUID();
+      const jsonString = JSON.stringify({ credential, format });
+
+      await this.storage.setItem(this.buildKey(id), jsonString);
+      return id;
+    } catch (e) {
+      throw new Error(
+        `Failed to save credential: ${e instanceof Error ? e.message : String(e)}`,
+      );
+    }
   }
 
   async getCredentialById(id: string): Promise<string | null> {
-    const raw = await this.storage.getItem(this.buildKey(id));
-    return raw ? JSON.parse(raw) : null;
+    try {
+      const jsonString = await this.storage.getItem(this.buildKey(id));
+      if (!jsonString) return null;
+      return jsonString;
+    } catch (e) {
+      throw new Error(
+        `Failed to get credential: ${e instanceof Error ? e.message : String(e)}`,
+      );
+    }
   }
 
   async deleteCredential(id: string): Promise<void> {
-    await this.storage.removeItem(this.buildKey(id));
+    try {
+      await this.storage.removeItem(this.buildKey(id));
+    } catch (e) {
+      throw new Error(
+        `Failed to delete credential: ${e instanceof Error ? e.message : String(e)}`,
+      );
+    }
   }
 
-  async listCredentials(query?: rawDCQL): Promise<string[]> {
+  async listCredentials(query?: rawDCQL): Promise<string> {
     const keys = (await this.storage.keys?.()) || [];
-    const credentialKeys = keys.filter((k) => k.startsWith('credential:'));
-
+    const credentialKeys = keys.filter((k) => k.startsWith(KEY_PREFIX));
     const rawCredentials: Record<string, unknown>[] = [];
 
     for (const key of credentialKeys) {
-      const raw = await this.storage.getItem(key);
-      if (!raw) continue;
-
       try {
-        const { credential, format } = JSON.parse(raw);
+        const jsonString = await this.storage.getItem(key);
+        if (!jsonString) continue;
+
+        const { credential, format } = JSON.parse(jsonString);
 
         if (format === 'dc+sd-jwt') {
           const decoded = decodeSDJWT(credential);
-          rawCredentials.push(decoded.claims as Record<string, unknown>);
+          const claims = decoded.claims as Record<string, unknown>;
+          rawCredentials.push({
+            raw: credential,
+            ...claims,
+          });
         } else {
           throw new Error('Unsupported format');
         }
       } catch (e) {
-        console.error('Failed to parse credential:', e);
-        continue;
+        // @Todo: Handle partial success on v0.2
+        throw new Error(
+          `Failed to parse credential: ${e instanceof Error ? e.message : String(e)}`,
+        );
       }
     }
 
     if (!query) {
-      return rawCredentials.map((c) => JSON.stringify(c));
+      return JSON.stringify(rawCredentials);
     }
 
     const dcql = DCQL.parse(query);
     const result = dcql.match(rawCredentials);
 
     if (!result.match || !result.matchedCredentials) {
-      return [];
+      return JSON.stringify([]);
     }
 
-    return result.matchedCredentials.map((m) => JSON.stringify(m.credential));
+    return JSON.stringify(result.matchedCredentials.map((m) => m.credential));
+  }
+
+  clear() {
+    this.storage.clear?.();
   }
 }
 
