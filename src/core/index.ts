@@ -11,16 +11,19 @@ import { Oid4VpClient, type RequestObject } from '@vdcs/oid4vp-client';
 import { P256, normalizePrivateKey } from '@vdcs/jwt';
 import { sha256 } from '@sd-jwt/hash';
 import { uint8ArrayToBase64Url } from '@sd-jwt/utils';
-import { Format, rawDCQL } from '../types/credential';
 import { DCXException } from '../utils';
 import { NFCService } from '../nfc';
 import { BLEService } from '../ble';
+import { Format, rawDCQL } from '../types';
+import { PresentationSession } from './presentation-session';
 
 class WalletSDK {
   credentialStore: CredentialStore;
   jwk: EcPrivateJwk;
   nfcService: NFCService;
   bleService: BLEService;
+
+  presentSession: PresentationSession;
 
   constructor({
     storage,
@@ -34,7 +37,6 @@ class WalletSDK {
     );
     this.jwk = jwk;
     this.nfcService = new NFCService();
-
     this.bleService = new BLEService(this);
   }
 
@@ -53,10 +55,11 @@ class WalletSDK {
     }
   }
 
-  async load(requestUri: string): Promise<RequestObject> {
+  async load(requestUri: string): Promise<PresentationSession> {
     try {
       const client = await Oid4VpClient.fromRequestUri(requestUri);
-      return client.request;
+
+      return new PresentationSession(client.request);
     } catch (e: unknown) {
       throw new DCXException('Failed to load request object', { cause: e });
     }
