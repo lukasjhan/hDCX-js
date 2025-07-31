@@ -49,28 +49,13 @@ await wallet.save(credentials);
 
 ```ts
 // Load credentials with query
-const credentials = await wallet.load(['name', 'age']);
+const credentials = await wallet.load(query);
 
 // Present Credentials
 const presentation = await wallet.present(credentials);
 ```
 
 ![img](/assets/wallet.png)
-
-## Backwards compatibility
-
-| SD-JWT VC | OIDC4VCI              | OIDC4VP  | Token Status List |
-| --------- | --------------------- | -------- | ----------------- |
-| draft 07  | Implementors draft v1 | draft 20 | draft 05          |
-
-## Interoperability
-
-We are interoperable with
-
-| Name        | Interoperable |
-| ----------- | ------------- |
-| Lissi       | ⌛            |
-| Amino Funke | ⌛            |
 
 ## License
 
