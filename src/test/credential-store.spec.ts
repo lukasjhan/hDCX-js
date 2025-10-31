@@ -81,7 +81,7 @@ describe('CredentialStore', () => {
         {
           id: 'cred-1',
           format: 'dc+sd-jwt',
-          meta: { vct_value: 'IdentityCredential' }, // matches only mockCredential1
+          meta: { vct_values: ['IdentityCredential'] }, // matches only mockCredential1
           claims: [],
         },
       ],
@@ -112,7 +112,7 @@ describe('CredentialStore', () => {
           {
             id: 'cred-x',
             format: 'dc+sd-jwt',
-            meta: { vct_value: 'non-existent' },
+            meta: { vct_values: ['non-existent'] },
             claims: [],
           },
         ],
