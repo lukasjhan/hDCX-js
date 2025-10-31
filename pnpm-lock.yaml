@@ -33,20 +33,20 @@ importers:
         specifier: ^0.10.0
         version: 0.10.0
       '@vdcs/dcql':
-        specifier: ^0.1.8
-        version: 0.1.8
+        specifier: ^0.1.9
+        version: 0.1.9
       '@vdcs/jwt':
-        specifier: ^0.1.8
-        version: 0.1.8
+        specifier: ^0.1.9
+        version: 0.1.9
       '@vdcs/oid4vci':
-        specifier: ^0.1.8
-        version: 0.1.8
+        specifier: ^0.1.9
+        version: 0.1.9
       '@vdcs/oid4vci-client':
-        specifier: ^0.1.8
-        version: 0.1.8
+        specifier: ^0.1.9
+        version: 0.1.9
       '@vdcs/oid4vp-client':
-        specifier: ^0.1.8
-        version: 0.1.8
+        specifier: ^0.1.9
+        version: 0.1.9
       expo-crypto:
         specifier: ^14.1.5
         version: 14.1.5(expo@53.0.11(@babel/core@7.27.4)(react-native@0.79.2(@babel/core@7.27.4)(react@19.1.0))(react@19.1.0))
@@ -1544,24 +1544,24 @@ packages:
     peerDependencies:
       '@urql/core': ^5.0.0
 
-  '@vdcs/dcql@0.1.8':
-    resolution: {integrity: sha512-x2cTXFc0t61oC3V9BxYFYcSXJh/EwyiOMO4ycsp925MkAEoYph/4FvavqXoTc+l/JZWRsXP+B43siwk6QKQ57Q==}
+  '@vdcs/dcql@0.1.9':
+    resolution: {integrity: sha512-8hO2VSM015FTOR/Dx18Bv0TZ/EGBwYmP2HcMPznuOs1Q3FKGipQbYind02KSZpXGw/UPU5Gx8gjLFdBEHKM7CQ==}
     engines: {node: '>=16'}
 
-  '@vdcs/jwt@0.1.8':
-    resolution: {integrity: sha512-Ewwxz+Zc4Wy+rOf92hZW7pa5YPomY8waX+MMZwq1fpmFHf8Z/jrzNLDhzHGP+ZtQZ+V74yo+VnFkAGgGuC96Kg==}
+  '@vdcs/jwt@0.1.9':
+    resolution: {integrity: sha512-X8PoOQJaU+XZCrWXvTZEufY/y91KayvKKr4skCwyaEvyxOUZPYDF+DixkjiSKe46ZgIRYqF/2eOAr5Zd+37dxQ==}
     engines: {node: '>=16'}
 
-  '@vdcs/oid4vci-client@0.1.8':
-    resolution: {integrity: sha512-NZ1V5zBcDy0YUryyhORuItIyPljIIWNVtGixnSNES0GOZMZ2+Rnj/D+bb3q5aw0fhQ8+DkKdEbpnOyeIPmdDww==}
+  '@vdcs/oid4vci-client@0.1.9':
+    resolution: {integrity: sha512-FwWenPPa3cQANyFDPcVM3WYkIT+50pE7q3SCMrs03RuEqqUi5yd18P52yHFFr01U3WNq2kQnhdzS4lLiTRb+2A==}
     engines: {node: '>=16'}
 
-  '@vdcs/oid4vci@0.1.8':
-    resolution: {integrity: sha512-Nr1RAr7DVK5D3eSNjWbrRRPXQ9JRF2ovoRRwAGULyp6us1N03l2qgxnf78WALdMkphmyeZyjH1d1EU5s6L4Yzw==}
+  '@vdcs/oid4vci@0.1.9':
+    resolution: {integrity: sha512-yz1v/tnojJ0AmGLOQx8xXgsiG3K3G4E+Q8xZaX77A9hwuaw671aTqg8wY4X1yYJQYmeaSE5Q3y+H3ILBD0q9EA==}
     engines: {node: '>=16'}
 
-  '@vdcs/oid4vp-client@0.1.8':
-    resolution: {integrity: sha512-Hu48C6ZoHNukZfKDnOtEkr7abrp+Y59TDQdntmTGPIcQBMPNGRTvLqI8zbWLSkIDdVtKvukoZEtZ72znvpOblQ==}
+  '@vdcs/oid4vp-client@0.1.9':
+    resolution: {integrity: sha512-Gh8aZlw/dr4Z1HmXnW+9DQldzki8xFiMYd4TXAfKYquORXvrE6qglwmWDpDaOw8qAh9S9rHnQJNjMpkqhu2yUQ==}
     engines: {node: '>=16'}
 
   '@vitest/coverage-v8@1.6.1':
@@ -5776,29 +5776,29 @@ snapshots:
       '@urql/core': 5.1.1
       wonka: 6.3.5
 
-  '@vdcs/dcql@0.1.8': {}
+  '@vdcs/dcql@0.1.9': {}
 
-  '@vdcs/jwt@0.1.8':
+  '@vdcs/jwt@0.1.9':
     dependencies:
       '@noble/curves': 1.9.2
       '@sd-jwt/hash': 0.10.0
       '@sd-jwt/utils': 0.10.0
       js-base64: 3.7.7
 
-  '@vdcs/oid4vci-client@0.1.8':
+  '@vdcs/oid4vci-client@0.1.9':
     dependencies:
-      '@vdcs/jwt': 0.1.8
-      '@vdcs/oid4vci': 0.1.8
+      '@vdcs/jwt': 0.1.9
+      '@vdcs/oid4vci': 0.1.9
       axios: 1.9.0
     transitivePeerDependencies:
       - debug
 
-  '@vdcs/oid4vci@0.1.8': {}
+  '@vdcs/oid4vci@0.1.9': {}
 
-  '@vdcs/oid4vp-client@0.1.8':
+  '@vdcs/oid4vp-client@0.1.9':
     dependencies:
-      '@vdcs/dcql': 0.1.8
-      '@vdcs/jwt': 0.1.8
+      '@vdcs/dcql': 0.1.9
+      '@vdcs/jwt': 0.1.9
       axios: 1.9.0
     transitivePeerDependencies:
       - debug
